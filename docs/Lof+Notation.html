@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Suranna&display=swap" rel="stylesheet">
+<style>
+.lofS{
+  display:inline-table;
+  border-top:3px solid black;
+  border-right:3px solid black;
+  margin-top:3px;
+  margin-right:2px;
+  padding-left:2px;
+  padding-right:3px;
+  margin-bottom:0;
+  padding-bottom:0;
+  min-height:1em;
+  min-width:0.6em
+  
+}
+#solution{ line-height:1em;
+  background-color:white;
+  font-family: "Suranna", serif;
+  font-size:1em;
+  font-weight: 500;
+  font-style: normal;
+  white-space: nowrap
+}
+
+tr,td,#solution,.sentence{margin:0;padding:0}
+
+.formStyle{padding:5px;padding-left:0}
+
+#img{border:1px solid black}
+
+
+</style>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+  integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<h1>LoF notation</h1>
+<div>
+  <p>Insert the laws of form bracket notation and obtain the img of it, for example ((a)b):
+</div>
+
+<div>
+  <table id="form">
+    <tr>
+      <td class="formStyle"><label for="lineh">font-size in em:</label></td>
+      <td class="formStyle"><input type="text" name="lineh" id="lineh" value="1"></td>
+    </tr>
+    <tr>
+      <td class="formStyle"><label for="lofInput">lof sentence:</label></td>
+      <td class="formStyle"><input type="text" name="lofInput" id="lofInput"></td>
+    </tr>
+    <tr>
+      <td class="formStyle" colspan="2"><input type="submit" value="Submit" name="exec" id="exec"></td>
+    </tr>
+  </table>  
+</div>
+
+<div>
+ <table id="output">
+  <tr>
+   <th>html</th>
+   <th>image</th>
+  </tr>
+  <tr>
+   <td id="soldiv">
+     <p id="solution"></p>
+   </td>
+   <td id="img"></div>
+   </td>
+  </tr>
+ </table>
+</div>
+
+<script>  
+$( "#exec" ).on( "click", function() {
+  $("#solution").css("font-size",($("#lineh").val())+"em");
+  var str = $("#lofInput").val();
+  $("#solution").html(replacePar(str));
+  
+  domtoimage.toPng(document.getElementById('soldiv'))
+    .then(function (dataUrl) { 
+        var img = new Image();
+        img.src = dataUrl;
+        pp = $('#img');
+        $("#img >img").remove();
+        pp.append(img);
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });  
+});
+
+function replacePar(str){
+    var str1="";
+    str1= str.replaceAll("(","<span class='lofS'>");
+    str1= str1.replaceAll(")","</span>");
+    return "<span class='sentence'>"+str1+"</span>";
+}
+  
+</script>
+</body>
+</html>
