@@ -93,7 +93,7 @@ $( "#exec" ).on( "click", function() {
   var str = $("#lofInput").val();
   $("#solution").html(replacePar(str));
   
-  domtoimage.toPng(document.getElementById('soldiv'))
+  domtoimage.toPng(document.getElementById('solution'))
     .then(function (dataUrl) { 
         var img = new Image();
         img.src = dataUrl;
