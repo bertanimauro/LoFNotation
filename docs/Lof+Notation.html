@@ -14,10 +14,13 @@
   border-right:3px solid black;
   margin-top:3px;
   margin-right:2px;
-  padding-left:2px;
   padding-right:3px;
   margin-bottom:0;
   padding-bottom:0;
+  margin-left:0;
+  padding-left:0;
+  border-left-width:0;
+  border-bottom-width:0;
   min-height:1em;
   min-width:0.6em
   
@@ -107,7 +110,7 @@ function replacePar(str){
     var str1="";
     str1= str.replaceAll("(","<span class='lofS'>");
     str1= str1.replaceAll(")","</span>");
-    return "<span class='sentence'>"+str1+"</span>";
+    return "<span class='sentence'>&nbsp;"+str1+"&nbsp;</span>";
 }
   
 </script>
